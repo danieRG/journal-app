@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotesAppBar } from './NotesAppBar';
 import { useForm } from '../../hooks/useForm';
+import { activeNote } from '../../actions/notes';
 
 export const NoteScreen = () => {
 
@@ -18,6 +19,10 @@ export const NoteScreen = () => {
         }
     },[note, reset]);
 
+    useEffect(() => {
+        dispatch(activeNote(formValues.id, {...formValues}));
+    },[formValues, dispatch])
+
   return <div className='notes__main-content'>
       <NotesAppBar />
 
@@ -28,12 +33,14 @@ export const NoteScreen = () => {
             autoComplete='off'
             value={title}
             onChange={handleInputChange}
+            name="title"
         />
         <textarea
             placeholder='What happened today?'
             className='notes__textarea'
             value={body}
             onChange={handleInputChange}
+            name="body"
         >
 
         </textarea>
