@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { NotesAppBar } from './NotesAppBar';
 import { useForm } from '../../hooks/useForm';
-import { activeNote } from '../../actions/notes';
+import { activeNote, startDeleting } from '../../actions/notes';
 
 export const NoteScreen = () => {
 
@@ -22,6 +22,11 @@ export const NoteScreen = () => {
     useEffect(() => {
         dispatch(activeNote(formValues.id, {...formValues}));
     },[formValues, dispatch])
+
+
+    const handleDelete = () => {
+        dispatch(startDeleting(note.id))
+    }
 
   return <div className='notes__main-content'>
       <NotesAppBar />
@@ -47,12 +52,19 @@ export const NoteScreen = () => {
         {
             (note.url) &&
             (<div className='notes__image'>
-                <img src='https://neliosoftware.com/es/wp-content/uploads/sites/3/2018/07/aziz-acharki-549137-unsplash-1200x775.jpg' 
+                <img src={note.url}
                 alt='imagen'
             />
             
-            </div>)
+            </div>
+        )
 }
       </div>
+      <button 
+        className='btn btn-danger'
+        onClick={ handleDelete}
+        >
+            Delete
+      </button>
   </div>;
 };

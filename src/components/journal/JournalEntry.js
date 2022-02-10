@@ -16,7 +16,7 @@ export const JournalEntry = ({id, date, title, body, url}) => {
   }
 
   return <div 
-    className='journal__entry pointer'
+    className='journal__entry pointer animate__animated animate__fadeIn animate__faster'
       onClick={handleEntryClick}
     >
 
@@ -25,7 +25,7 @@ export const JournalEntry = ({id, date, title, body, url}) => {
       <div className='journal__entry-picture'
         style={{
             backgroundSize: 'cover',
-            backgroundImage: 'url(https://neliosoftware.com/es/wp-content/uploads/sites/3/2018/07/aziz-acharki-549137-unsplash-1200x775.jpg)'
+            backgroundImage: `url(${url})`
         }}
       >    
       </div>
